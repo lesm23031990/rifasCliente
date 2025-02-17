@@ -1,25 +1,21 @@
-<script setup>
+<!--script setup>
 import { useStore } from "vuex";
 const store = useStore();
-</script>
+</script-->
 <template>
   <footer class="py-3 footer">
     <div class="container-fluid">
       <div class="row align-items-center justify-content-lg-between">
         <div class="mb-4 col-lg-6 mb-lg-0">
           <div
-            class="text-sm text-center copyright text-muted"
-            :class="store.state.isRTL ? 'text-lg-end' : 'text-lg-start'"
+            class="text-sm text-center copyright text-muted text-lg-start"
           >
-            ©
-            {{ new Date().getFullYear() }}, hecho con 
+            © {{ new Date().getFullYear() }}, desarrollado con 
             <i class="fa fa-heart"></i> por
-            <a
-              href="#"
-              class="font-weight-bold"
-              target="_blank"
-              >Lorena Salas</a
-            >. Reservados todos los derechos.
+            <a href="#" class="font-weight-bold" target="_blank">Lorena Salas</a>
+            utilizando tecnología de 
+            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>.
+            Todos los derechos reservados.
           </div>
         </div>
         <div class="col-lg-6">
