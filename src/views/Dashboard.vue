@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
                 <p class="subtitle fade-in-up delay-1">Donde los sueños tienen números de la suerte</p>
               </div>
               <div class="mt-5 fade-in-up delay-2">
-                <button class="btn bg-success btn-lg text-white pulse-button">
+                <button class="btn bg-success btn-lg text-white pulse-button" href="#sorteos">
                   ¡Participa Ahora! <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>

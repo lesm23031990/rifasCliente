@@ -18,7 +18,9 @@ const state = {
   
   // Tema
   colorPrimary1: process.env.VUE_APP_COLOR_PRIMARY_1,
-  colorPrimary2: process.env.VUE_APP_COLOR_PRIMARY_2
+  colorPrimary2: process.env.VUE_APP_COLOR_PRIMARY_2,
+
+  isProcessed: false
 };
 
 const getters = {
@@ -30,7 +32,8 @@ const getters = {
   getTextSubtitle3: state => state.textSubtitle3,
   getBoletos: state => state.boletos,
   getColorPrimary1: state => state.colorPrimary1,
-  getColorPrimary2: state => state.colorPrimary2
+  getColorPrimary2: state => state.colorPrimary2,
+  getIsProcessed: state => state.isProcessed
 };
 
 const mutations = {
@@ -72,44 +75,21 @@ const mutations = {
   },
   SET_COLOR_LOGO(state, value) {
     state.colorLogo = value;
+  },
+  SET_IS_PROCESSED(state, value) {
+    state.isProcessed = value;
   }
 };
 
 const actions = {
-  /*updateTextLogo({ commit }, value) {
-    commit('SET_TEXT_LOGO', value);
-  },
-  updateTextSubtitle({ commit }, value) {
-    commit('SET_TEXT_SUBTITLE', value);
-  },
-  updateTextTitle({ commit }, value) {
-    commit('SET_TEXT_TITLE', value);
-  },
-  updateTextSubtitle1({ commit }, value) {
-    commit('SET_TEXT_SUBTITLE1', value);
-  },
-  updateTextSubtitle2({ commit }, value) {
-    commit('SET_TEXT_SUBTITLE2', value);
-  },
-  updateTextSubtitle3({ commit }, value) {
-    commit('SET_TEXT_SUBTITLE3', value);
-  },
-  updateBoletos({ commit }, value) {
-    commit('SET_BOLETOS', value);
-  },
-  updateColorPrimary1({ commit }, value) {
-    commit('SET_COLOR_PRIMARY1', value);
-  },
-  updateColorPrimary2({ commit }, value) {
-    commit('SET_COLOR_PRIMARY2', value);
-  },*/
   async updateSetting({ commit, state }) {
     try {
       const response = await axios.get('/api/settings');
       const settings = response.data;
-      Object.keys(state).forEach(key => {
+      /*Object.keys(state).forEach(key => {
         commit('SET_' + key, settings[key]);
-      });
+      });*/
+      commit('SET_IS_PROCESSED', true);
     } catch (error) {
       console.log(error);
     }
