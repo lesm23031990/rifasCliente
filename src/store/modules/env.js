@@ -8,6 +8,10 @@ const state = {
   textSubtitle1: process.env.VUE_APP_TEXT_SUBTITLE1,
   textSubtitle2: process.env.VUE_APP_TEXT_SUBTITLE2,
   textSubtitle3: process.env.VUE_APP_TEXT_SUBTITLE3,
+  colorText: process.env.VUE_APP_COLOR_TEXT,
+  colorContrast: process.env.VUE_APP_COLOR_CONSTRAST,
+  nameTheme: process.env.VUE_APP_NAME_THEME,
+  colorLogo: process.env.VUE_APP_COLOR_LOGO,
   
   // Configuración
   boletos: parseInt(process.env.VUE_APP_BOLETOS) || 1000,
@@ -56,11 +60,23 @@ const mutations = {
   },
   SET_COLOR_PRIMARY2(state, value) {
     state.colorPrimary2 = value;
+  },
+  SET_COLOR_TEXT(state, value) {
+    state.colorText = value;
+  },
+  SET_COLOR_CONSTRAST(state, value) {
+    state.colorContrast = value;
+  },
+  SET_NAME_THEME(state, value) {
+    state.nameTheme = value;
+  },
+  SET_COLOR_LOGO(state, value) {
+    state.colorLogo = value;
   }
 };
 
 const actions = {
-  updateTextLogo({ commit }, value) {
+  /*updateTextLogo({ commit }, value) {
     commit('SET_TEXT_LOGO', value);
   },
   updateTextSubtitle({ commit }, value) {
@@ -86,7 +102,7 @@ const actions = {
   },
   updateColorPrimary2({ commit }, value) {
     commit('SET_COLOR_PRIMARY2', value);
-  },
+  },*/
   async updateSetting({ commit, state }) {
     try {
       const response = await axios.get('/api/settings');

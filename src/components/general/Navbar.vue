@@ -3,14 +3,16 @@ import { useStore } from "vuex";
 import { computed } from 'vue';
 
 const store = useStore();
-const titulo = computed(() => store.state.env.textLogo || process.env.VUE_APP_TEXT_LOGO || "SorteaTelo");
+const titulo = computed(() => store.state.env.textLogo || process.env.VUE_APP_TEXT_LOGO);
+const subtitulo = computed(() => store.state.env.textSubtitle || process.env.VUE_APP_TEXT_SUBTITLE);
 
-const colorPrimary1 = computed(() => {
-  return store.state.env.colorPrimary1 || process.env.VUE_APP_COLOR_PRIMARY_1 || '#17ad37';
-});
-const colorPrimary2 = computed(() => store.state.env.colorPrimary2 || process.env.VUE_APP_COLOR_PRIMARY_2 || '#98ec2d');
+const colorPrimary1 = computed(() => store.state.env.colorPrimary1 || process.env.VUE_APP_COLOR_PRIMARY_1);
+const colorPrimary2 = computed(() => store.state.env.colorPrimary2 || process.env.VUE_APP_COLOR_PRIMARY_2);
+const colorContrast = computed(() => store.state.env.colorContrast || process.env.VUE_APP_COLOR_CONSTRAST);
+const colorText = computed(() => store.state.env.colorText || process.env.VUE_APP_COLOR_TEXT);
+const colorLogo = computed(() => store.state.env.colorLogo || process.env.VUE_APP_COLOR_LOGO);
 
-const minimizeSidebar = () => store.commit("sidebarMinimize");
+//const minimizeSidebar = () => store.commit("sidebarMinimize");
 const toggleConfigurator = () => store.commit("toggleConfigurator");
 
 </script>
@@ -30,8 +32,9 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
             href="#sorteos" 
             class="ball ball-1" 
             data-bs-toggle="tooltip"
-             data-bs-placement="top" 
-             title="Sorteos"
+            data-bs-placement="top" 
+            title="Sorteos"
+            :style="`background: ${colorContrast}; color: ${colorText};`"
           >
             $
           </a>
@@ -41,6 +44,7 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
             data-bs-toggle="tooltip"
             data-bs-placement="top" 
             title="Boletos"
+            :style="`background: ${colorContrast}; color: ${colorText};`"
           >
             <i class="fas fa-trophy"></i>
           </a>
@@ -50,6 +54,7 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
             data-bs-toggle="tooltip"
             data-bs-placement="top" 
             title="Métodos de Pago"
+            :style="`background: ${colorContrast}; color: ${colorText};`"
           >
             <i class="fas fa-star"></i>
           </a>
@@ -59,33 +64,46 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
             data-bs-toggle="tooltip"
             data-bs-placement="top" 
             title="Contactos"
+            :style="`background: ${colorContrast}; color: ${colorText};`"
           >
             <i class="fas fa-gift"></i>
           </a>
         </div>
         <h1 class="brand-title">
-          <span class="text-gradient">{{ titulo.slice(0, 6) }}</span>
-          <span class="text-white">{{ titulo.slice(6) }}</span>
+          <span 
+            class="text-gradient" 
+            :style="`background-image: linear-gradient(to right, ${colorContrast}, ${colorLogo});`"
+          >{{ titulo.slice(0, 6) }}</span>
+          <span 
+            :style="`color: ${colorContrast};`"
+          >{{ titulo.slice(6) }}</span>
         </h1>
-        <p class="header-subtitle">Tu destino con la suerte</p>
+        <p class="header-subtitle" :style="`color: ${colorContrast};`">{{subtitulo}}</p>
       </div>
       <ul class="navbar-nav justify-content-end">
         <li class="nav-item d-flex align-items-center">
           <router-link
             :to="{ name: 'Signin' }"
-            class="px-0 nav-link font-weight-bold text-white"
+            class="px-0 nav-link font-weight-bold"
             target="_blank"
             title="Iniciar Sesión"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            :style="`color: ${colorContrast};`"
           >
             <i class="fa fa-user"></i>
           </router-link>
         </li>
-        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+        <!--li class="nav-item d-xl-none ps-3 d-flex align-items-center">
           <a
             href="#"
             @click="minimizeSidebar"
-            class="p-0 nav-link text-white"
+            class="p-0 nav-link"
             id="iconNavbarSidenav"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Minimizar/Maximizar"
+            :style="`color: ${colorContrast};`"
           >
             <div class="sidenav-toggler-inner">
               <i class="sidenav-toggler-line bg-white"></i>
@@ -93,10 +111,10 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
               <i class="sidenav-toggler-line bg-white"></i>
             </div>
           </a>
-        </li>
+        </li-->
         <li class="px-3 nav-item d-flex align-items-center">
-          <a class="p-0 nav-link text-white" @click="toggleConfigurator">
-            <i class="cursor-pointer fa fa-cog fixed-plugin-button-nav"></i>
+          <a class="p-0 nav-link text-white" @click="toggleConfigurator" data-bs-toggle="tooltip" data-bs-placement="top" title="Configuración">
+            <i class="cursor-pointer fa fa-cog fixed-plugin-button-nav" :style="`color: ${colorContrast};`"></i>
           </a>
         </li>
       </ul>
@@ -123,14 +141,14 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
 .ball {
   width: 50px;
   height: 50px;
-  background: white;
+  /*background: white;*/
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #17ad37;
+  /*color: #17ad37;*/
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   animation: float 3s ease-in-out infinite;
 }
@@ -143,17 +161,20 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #ffffff, #98ec2d);
+  background-image: linear-gradient(to right, var(--color-contrast, #ffffff), var(--color-logo, #98ec2d));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  display: inline-block;
 }
 
 .text-white {
-  color: white;
+  /*color: white;*/
 }
 
 .header-subtitle {
-  color: white;
+  /*color: white;*/
   font-size: 1.2rem;
   margin: 0;
 }
