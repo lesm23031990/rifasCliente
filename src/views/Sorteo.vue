@@ -2,7 +2,7 @@
 import { onMounted, onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { useStore } from "vuex";
 import AppFooter from "@/components/general/Footer.vue";
-import Navbar from "@/components/general/Navbar.vue";
+import Navbar from "@/components/general/NavbarSimple.vue";
 import setTooltip from "@/assets/js/tooltip.js";
 import { Modal } from 'bootstrap';
 
@@ -107,6 +107,12 @@ const abrirPopup = (banco) => {
   modal.show();
 };
 
+const showDetails = ref(false);
+
+const toggleDetails = () => {
+  showDetails.value = !showDetails.value;
+};
+
 onMounted(() => {
   setTooltip();
 });
@@ -145,39 +151,52 @@ onBeforeUnmount(() => {
   />
 
   <div
-    class="mx-3 mt-4 border-radius-xl position-relative"
-    :style="{
-      backgroundImage: 'url(' + require('@/assets/img/vr-bg.jpg') + ')',
-      backgroundSize: 'cover',
-    }"
+    class="mx-3 mt-4 border-radius-xl position-relative section-container"
   >
-    <main class="mt-1 main-content border-radius-lg">
-      <div class="section min-vh-85 position-relative transform-scale-0 transform-scale-md-7">
-        <div class="container-fluid">
-          <div class="pt-10 row justify-content-center text-center">
-            <div class="col-12 hero-content">
-              <h1 class="main-title animate-gradient">
-                Más premios, más ganadores, más oportunidades
-              </h1>
-              <div class="sub-titles">
-                <p class="subtitle fade-in-up">La manera más fácil y segura de participar en sorteos</p>
-                <p class="subtitle fade-in-up delay-1">Donde los sueños tienen números de la suerte</p>
-              </div>
-              <div class="mt-5 fade-in-up delay-2">
-                <button class="btn bg-success btn-lg text-white pulse-button">
-                  ¡Participa Ahora! <i class="fas fa-arrow-right ms-2"></i>
-                </button>
-              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div
+            class="sorteo-image"
+            :style="{
+              backgroundImage: 'url(' + require('@/assets/img/vr-bg.jpg') + ')',
+              backgroundSize: 'cover'
+            }"
+          ></div>
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+          <div class="sorteo-details">
+            <h3 class="sorteo-title">GRAN RIFA ESPECIAL</h3>
+            <p class="sorteo-description" style="font-weight: bold; color: #17ad37;">¡Participa y gana increíbles premios!</p>
+            <h4 style="color: #17ad37;">Detalles de la Rifa</h4>
+            <ul>
+              <li>Valor del boleto: <strong>$3 🇺🇸</strong> (Debes comprar mínimo 2 boletos para poder participar)</li>
+              <li>Nota importante: <strong>¡Atención!</strong> El sorteo de la rifa se realizará solo después de que se hayan vendido todos los números. Estaremos informando la fecha del sorteo tan pronto se completen las ventas.</li>
+            </ul>
+            <button class="btn bg-success text-white mt-3" @click="toggleDetails">Ver Detalles</button>
+            <div v-if="showDetails" class="details-content">
+              <h4 style="color: #17ad37;">Premios</h4>
+              <ol style="font-weight: bold;">
+                <li>Primer Premio: <span style="color: #ff5733;">Moto Bera Marca BRF 150cc</span></li>
+                <li>Segundo Premio: <span style="color: #ff5733;">250$ USD en efectivo</span></li>
+                <li>Tercer Premio: <span style="color: #ff5733;">Un Teléfono Android, Marca Redmi 14C - 8GB/256GB</span></li>
+                <li>Cuarto Premio: <span style="color: #ff5733;">Un TV Smart 43" Marca COBY HD</span></li>
+                <li>Premio Especial: <span style="color: #ff5733;">Un Teléfono Android Marca Tecno Spark 30 - 16GB/256GB</span> para quien compre más boletos (Válido a partir de 5 boletos en adelante)</li>
+              </ol>
+              <p><strong style="color: #17ad37;">Fecha del sorteo:</strong> <span style="font-weight: bold;">Fecha (Pendiente)</span></p>
+              <p>Por las últimas 3 cifras y La Moto por las primeras 3 cifras de la lotería Super Gana (4to premio 1:00pm /3 últimas cifras) - (3er premio 4:00pm /3 últimas cifras) - (2do premio 10:00pm /3 últimas cifras) y (1er premio 10:00pm /3 primeras cifras)</p>
+              <p><strong style="color: #17ad37;">HORA VENEZUELA 🇻🇪⏰</strong></p>
+              <p>¡Participa desde cualquier lugar! No te pierdas esta oportunidad de ganar increíbles premios. ¡Compra tus boletos ahora!</p>
+              <p><strong>Rifas Optimus JMT</strong></p>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 
   <div
     class="mx-3 mt-4 border-radius-xl position-relative section-container"
-    id="sorteos"
   >
     <div class="container">
       <div class="section-header">
@@ -216,7 +235,6 @@ onBeforeUnmount(() => {
 
   <div
     class="mx-3 mt-4 border-radius-xl position-relative section-container"
-    id="boletos"
   >
     <div class="container">
       <div class="section-header">
@@ -336,7 +354,6 @@ onBeforeUnmount(() => {
 
   <div
     class="mx-3 mt-4 border-radius-xl position-relative section-container"
-    id="metodos_pagos"
   >
     <div class="container">
       <div class="section-header">

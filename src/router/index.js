@@ -1,26 +1,32 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
-import Tables from "../views/Tables.vue";
-import Billing from "../views/Billing.vue";
+////import Tables from "../views/Tables.vue";
+//import Billing from "../views/Billing.vue";
 //import VirtualReality from "../views/VirtualReality.vue";
-import RTL from "../views/Rtl.vue";
-import Profile from "../views/Profile.vue";
+///import RTL from "../views/Rtl.vue";
+//import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
+import Sorteo from "../views/Sorteo.vue";
 
 const routes = [
   {
     path: "/",
     name: "/",
     component: Dashboard,
-    //redirect: "/dashboard-default",
+    redirect: "/dashboard",
   },
   {
-    path: "/dashboard-default",
+    path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
   },
   {
+    path: "/sorteo/:seoLink",
+    name: "Sorteo",
+    component: Sorteo,
+  },
+  /*{
     path: "/tables",
     name: "Tables",
     component: Tables,
@@ -35,7 +41,7 @@ const routes = [
     name: "Virtual Reality",
     component: VirtualReality,
   },*/
-  {
+  /*{
     path: "/rtl-page",
     name: "RTL",
     component: RTL,
@@ -44,7 +50,7 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
-  },
+  },*/
   {
     path: "/signin",
     name: "Signin",

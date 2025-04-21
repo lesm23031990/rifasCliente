@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import configuracion from './modules/configuracion';
+import env from './modules/env';
 
 export default createStore({
   state: {
@@ -53,6 +53,6 @@ export default createStore({
   },
   getters: {},
   modules: {
-    configuracion
+    env
   }
 });

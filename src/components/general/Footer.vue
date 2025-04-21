@@ -48,7 +48,7 @@ const contactInfo = ref({
 </script>
 
 <template>
-  <footer>
+  <footer id="contactos">
     <!-- Sección de Contacto -->
     <div class="footer-contact">
       <div class="container py-5">

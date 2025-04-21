@@ -1,8 +1,14 @@
 <script setup>
 import { useStore } from "vuex";
+import { computed } from 'vue';
 
 const store = useStore();
-const titulo = "SorteaTelo";
+const titulo = computed(() => store.state.env.textLogo || process.env.VUE_APP_TEXT_LOGO || "SorteaTelo");
+
+const colorPrimary1 = computed(() => {
+  return store.state.env.colorPrimary1 || process.env.VUE_APP_COLOR_PRIMARY_1 || '#17ad37';
+});
+const colorPrimary2 = computed(() => store.state.env.colorPrimary2 || process.env.VUE_APP_COLOR_PRIMARY_2 || '#98ec2d');
 
 const minimizeSidebar = () => store.commit("sidebarMinimize");
 const toggleConfigurator = () => store.commit("toggleConfigurator");
@@ -15,21 +21,47 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
     v-bind="$attrs"
     id="navbarBlur"
     data-scroll="true"
-    style="margin: 20px;"
+    :style="`margin: 20px; background: linear-gradient(150deg, ${colorPrimary1} 0%, ${colorPrimary2} 100%) !important;`"
   >
     <div class="px-3 py-1 container-fluid">
       <div class="header-content">
         <div class="lottery-balls">
-          <div class="ball ball-1">$</div>
-          <div class="ball ball-2">
+          <a 
+            href="#sorteos" 
+            class="ball ball-1" 
+            data-bs-toggle="tooltip"
+             data-bs-placement="top" 
+             title="Sorteos"
+          >
+            $
+          </a>
+          <a 
+            href="#boletos" 
+            class="ball ball-2" 
+            data-bs-toggle="tooltip"
+            data-bs-placement="top" 
+            title="Boletos"
+          >
             <i class="fas fa-trophy"></i>
-          </div>
-          <div class="ball ball-3">
+          </a>
+          <a 
+            href="#metodos_pagos" 
+            class="ball ball-3" 
+            data-bs-toggle="tooltip"
+            data-bs-placement="top" 
+            title="Métodos de Pago"
+          >
             <i class="fas fa-star"></i>
-          </div>
-          <div class="ball ball-4">
+          </a>
+          <a 
+            href="#contactos" 
+            class="ball ball-4" 
+            data-bs-toggle="tooltip"
+            data-bs-placement="top" 
+            title="Contactos"
+          >
             <i class="fas fa-gift"></i>
-          </div>
+          </a>
         </div>
         <h1 class="brand-title">
           <span class="text-gradient">{{ titulo.slice(0, 6) }}</span>
@@ -140,7 +172,7 @@ const toggleConfigurator = () => store.commit("toggleConfigurator");
 }
 
 .navbar {
-  background: linear-gradient(150deg, #17ad37 0%, #98ec2d 100%); /* Fondo del navbar */
+  /*background: linear-gradient(150deg, #17ad37 0%, #98ec2d 100%); *//* Fondo del navbar */
   border-radius: 1rem; /* Bordes redondeados */
 }
 </style>
